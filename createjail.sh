@@ -30,7 +30,7 @@ readConf(){
 }
 
 # Считываем конфиг
-readConf "host eif mask ip jails"
+readConf "host eif ip jails"
 
 # Если название хоста введено
 if [ -n "$1" ]; then
@@ -42,12 +42,6 @@ fi
 if [ -n "$2" ]; then
 	# Запоминаем название сетевого интефрейса
 	eif=$2
-fi
-
-# Если маска сети введена
-if [ -n "$3" ]; then
-	# Запоминаем маску сети
-	mask=$3
 fi
 
 # Если ip адрес сервера введен
@@ -142,7 +136,7 @@ else
 			# Активируем контейнер
 			printf "\n# Jails\njail_enable=\"YES\"\n" >> /etc/rc.conf
 			# Записываем выбранный алиас
-			createAlias "0" ${mask}
+			createAlias "0" "255.255.0.0"
 		else
 			# Записываем выбранный алиас
 			createAlias ${numberalias} "255.255.255.255"
